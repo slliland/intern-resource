@@ -1,5 +1,6 @@
 import openai
 import pandas as pd
+import os
 
 # Read the Excel file
 mb = pd.read_excel('Mood board.xlsx')
@@ -8,7 +9,7 @@ mb = pd.read_excel('Mood board.xlsx')
 con = mb.iloc[:, 6]
 
 # Initialize OpenAI API
-openai.api_key = "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"
+openai.api_key = os.getenv('OPENAI_API_KEY')
 completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
