@@ -3,7 +3,6 @@ import time
 
 import pandas as pd
 from openai import OpenAI
-from openai import BadRequestError
 
 # 原始数据路径
 input_path = '/Users/songyujian/Downloads/Raw data_品牌开放题_第二批 0614【skincare+hair+perfume+men】.xlsx'

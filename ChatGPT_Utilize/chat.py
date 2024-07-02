@@ -2,6 +2,10 @@ import openai
 import pandas as pd
 import os
 
+"""
+情感辞典AI摘要
+"""
+
 # Read the Excel file
 mb = pd.read_excel('Mood board.xlsx')
 
@@ -18,26 +22,26 @@ completion = openai.ChatCompletion.create(
         )
 print(completion.choices[0].message.content)
 # Function to abstract keywords from text using OpenAI's GPT-3
-# def abstract(text):
-#     try:
-#         completion = openai.ChatCompletion.create(
-#             model="gpt-3.5-turbo",
-#             messages=[
-#                 {"role": "system", "content": "You are a bot to extract keywords from sentences."},
-#                 {"role": "user", "content": text}]
-#         )
-#         return completion.choices[0].message.content
-#     except Exception as e:
-#         print(f"Error processing text: {text}. Error: {e}")
-#         return ""
-#
-# # Process each sentence and store the results
-# res = [abstract(sentence) for sentence in con]
-#
-# # Create a DataFrame from the results
-# new_df = pd.DataFrame(res)
-#
-# # Print and save the DataFrame to a CSV file
-# print(new_df)
-# with open('result.csv', mode='a', newline='') as file:
-#     new_df.to_csv(file, header=False, index=False)
+def abstract(text):
+    try:
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": "You are a bot to extract keywords from sentences."},
+                {"role": "user", "content": text}]
+        )
+        return completion.choices[0].message.content
+    except Exception as e:
+        print(f"Error processing text: {text}. Error: {e}")
+        return ""
+
+# Process each sentence and store the results
+res = [abstract(sentence) for sentence in con]
+
+# Create a DataFrame from the results
+new_df = pd.DataFrame(res)
+
+# Print and save the DataFrame to a CSV file
+print(new_df)
+with open('result.csv', mode='a', newline='') as file:
+    new_df.to_csv(file, header=False, index=False)

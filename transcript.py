@@ -19,14 +19,14 @@ for i, para in enumerate(document.paragraphs):
         skip_next_para = False
         continue
 
-    # 检查当前段落是否以"M："开头且下一段落以"1/2："开头（写哪个就跳过那个人）
+    # 检查当前段落是否以"M："开头且下一段落以"1或2："开头（写哪个就跳过那个人）
     if text.startswith("M：") and (
             i + 1 < len(document.paragraphs) and document.paragraphs[i + 1].text.strip().startswith("1：")):
-        # 设置标志以跳过下一段落（即"2："）
+        # 设置标志以跳过下一段落（即你选中要跳过的那个人）
         skip_next_para = True
         continue
 
-    # 当前段落不是针对"2："的提问也不是"2："回答，将其添加到新文档中
+    # 当前段落不是针对要跳过的人的提问也不是要跳过的人的回答，将其添加到新文档中
     filtered_document.add_paragraph(para.text)
 
 # 保存过滤后的文档
